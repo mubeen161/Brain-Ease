@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Efficiency Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Styless.css') }}">
+</head>
+<body style="background-image: url('/static/images/sleep.jpg');">
+     
+    <div class="container">
+        <h1>Sleep Efficiency Prediction</h1>
+        <P  style="text-align: center;font-size: larger;">Sleep efficiency is the ratio between the time a person spends asleep, and the total time dedicated to sleep</P>
+        <form method="POST" action="/predict">
+            <label for="Age" style="margin-top: 5%;">Age:</label>
+            <!-- <P>Age of the person</P> -->
+            <input type="number" name="Age" required><br>
+
+            <label for="Gender">Gender:</label>
+            <!-- <p>Male or Female</p> -->
+            <select name="Gender" required>
+                <option value="0">Female</option>
+                <option value="1">Male</option>
+            </select>
+
+            <label for="sleep_duration">Sleep Duration:</label>
+            <p>The total amount of time the test subject slept (in hours)</p>
+            <input type="number" step="0.1" name="sleep_duration" required><br>
+
+            <label for="rem_percentage">REM Sleep Percentage:</label>
+            <p>Rapid eye movement (REM) sleep is the stage of sleep where most dreams happen</p>
+            <div class="range-input">
+                <input type="range" name="rem_percentage" min="1" max="100" value="35" required list="rem-range">
+                <!-- <output class="range-value" for="rem_percentage">35%</output> -->
+            </div>
+            <datalist id="rem-range">
+                <option value="1">10%</option>
+                <option value="25">25%</option>
+                <option value="50">50%</option>
+                <option value="75">75%</option>
+                <option value="100">100%</option>
+            </datalist>
+
+            <label for="deep_percentage">Deep Sleep Percentage:</label>
+            <p>Deep Sleep is the resting state in which the body is not active and the mind</p>
+            <input type="range" name="deep_percentage" min="1" max="100" value="30" required list="percentage-range">
+            <datalist id="percentage-range">
+                <option value="1">10%</option>
+                <option value="25">25%</option>
+                <option value="50">50%</option>
+                <option value="75">75%</option>
+                <option value="100">100%</option>
+            </datalist>
+
+            <label for="light_percentage">Light Sleep Percentage:</label>
+            <p>Light sleep is the transitional stage between waking and sleeping</p>
+            <input type="range" name="light_percentage" min="1" max="100" value="45" required list="percentage-range">
+            <datalist id="percentage-range">
+                <option value="1">10%</option>
+                <option value="25">25%</option>
+                <option value="50">50%</option>
+                <option value="75">75%</option>
+                <option value="100">100%</option>
+            </datalist>
+
+            <label for="awakenings">Awakenings:</label>
+            <p>Records the number of times each person wakes up during the night</p>
+            <input type="range" name="awakenings" min="0" max="10" step="0.1" value="2" required list="awakenings-range">
+            <datalist id="awakenings-range">
+                <option value="0">0</option>
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+            </datalist>
+
+            <label for="caffeine">Caffeine Consumption:</label>
+            <P>The amount of caffeine consumed in the 24 hours prior to bedtime(in mg)</P>
+            <input type="range" name="caffeine" min="0" max="300" step="0.1" value="0" required list="caffeine-range">
+            <datalist id="caffeine-range">
+                <option value="0">0</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="150">150</option>
+                <option value="200">200</option>
+                <option value="250">250</option>
+                <option value="300">300</option>
+            </datalist>
+
+            <label for="alcohol">Alcohol Consumption:</label>
+            <p>The amount of alcohol consumed in the 24 hours prior to bedtime(in oz)</p>
+            <input type="range" name="alcohol" min="0" max="10" step="0.1" value="0" required list="alcohol-range">
+            <datalist id="alcohol-range">
+                <option value="0">0</option>
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+            </datalist>
+
+            <label for="smoking">Smoking Status:</label>
+            <P>whether or not the person smokes</P>
+            <select name="smoking" required>
+                <option value="0">Non-Smoker</option>
+                <option value="1">Smoker</option>
+            </select>
+
+            <label for="exercise">Exercise Frequency:</label>
+            <p>The number of days the person exercises each week</p>
+            <input type="range" name="exercise" min="0" max="7" step="0.1" value="2" required list="exercise-range">
+            <datalist id="exercise-range">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </datalist>
+
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction %}
+        <div class="prediction">
+            <p>{{ prediction }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

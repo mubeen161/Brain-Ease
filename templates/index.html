@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Virtual Therapy Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1d2043bc;
+            background-image: url('E:/Hacktopia-GNI/code/bot/video_image.jpeg');
+            background-size: cover;
+            /* Adjust the image sizing */
+            background-position: center center;
+            /* Adjust the image position */
+        }
+
+        h1 {
+            border: 2px solid powderblue;
+            padding: 30px;
+            text-shadow: 2px 2px 5px rgb(6, 6, 52);
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #050a3cbc;
+            color: white;
+        }
+
+        .header .h1 {
+            color: #bd0202;
+            text-shadow: 2px 2px 5px rgb(0, 0, 46);
+
+
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .video-container {
+            border: 4px solid #4974cb;
+            max-width: 850px;
+            margin-top: 45px;
+            max-height: 600px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .control-buttons {
+            text-align: center;
+            margin-top: 45px;
+        }
+    </style>
+
+    <style>
+        .control-button {
+
+            font-size: 16px;
+            padding: 20px 20px;
+            margin: 0 10px;
+            border: none;
+            cursor: pointer;
+            background-color: #3f4cdabc;
+            color: white;
+            height: 100px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            width: 16%;
+
+        }
+
+        .control-button:hover {
+            background-color: #3f4cdabc;
+        }
+
+        .control-button:active {
+            background-color: #3f4cdabc;
+        }
+    </style>
+</head>
+<!-- <body style="background-image: url('E:/Hacktopia-GNI/code/bot/video_image.jpeg');"> -->
+
+<body
+    style="background-image: url('E:/Hacktopia-GNI/code/bot/video_image.jpeg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
+
+    <div class="header">
+        <h1>VIRTUAL THERAPY PLATFORM</h1>
+    </div>
+    <div class="center">
+        <div class="video-container">
+            <img src="{{ url_for('video_feed') }}" alt="Camera Feed">
+        </div>
+    </div>
+    <div class="control-buttons">
+        <button class="control-button" id="start-button">Start Session</button>
+        <button class="control-button" id="stop-button">Stop Session</button>
+        <button class="control-button" id="summary-button" disabled>Summary</button>
+    </div>
+
+    <div class="summary-section" style="display: none;">
+        <h2>Conversation Summary</h2>
+        <div class="summary-content"></div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        
+        $(document).ready(function () {
+    $('#start-button').click(function () {
+        $.ajax({
+            url: '/start_camera',
+            type: 'GET',
+            success: function (response) {
+                console.log('Camera and bot started');
+                $('#start-button').prop('disabled', true);
+                $('#stop-button').prop('disabled', false);
+            },
+            error: function (error) {
+                console.log('Error starting camera and bot:', error);
+            }
+        });
+    });
+
+    $('#stop-button').click(function () {
+        $.ajax({
+            url: '/stop_camera',
+            type: 'GET',
+            success: function (response) {
+                console.log('Camera and audio stopped');
+                $('#start-button').prop('disabled', false);
+                $('#stop-button').prop('disabled', true);
+            },
+            error: function (error) {
+                console.log('Error stopping camera and audio:', error);
+            }
+        });
+    });
+
+    $('#summary-button').click(function () {
+        $.ajax({
+            url: '/get_summary', // Update URL as needed
+            type: 'GET',
+            success: function (response) {
+                console.log('Summary received:', response);
+                // Update the summary content in the HTML
+                $('.summary-content').html(response);
+                // Show the summary section
+                $('.summary-section').show();
+            },
+            error: function (error) {
+                console.log('Error getting summary:', error);
+            }
+        });
+    });
+});
+
+
+</script>
+        >
+</body>
+
+</html>

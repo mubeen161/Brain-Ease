@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Virtual Therapy Platform</title>
+    <link rel="stylesheet" href="zaffstyles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#start-button').click(function () {
+                $.ajax({
+                    url: '/start_camera',
+                    type: 'GET',
+                    success: function (response) {
+                        console.log('Camera and bot started');
+                        $('#start-button').prop('disabled', true);
+                        $('#stop-button').prop('disabled', false);
+                    },
+                    error: function (error) {
+                        console.log('Error starting camera and bot:', error);
+                    }
+                });
+            });
+
+            $('#stop-button').click(function () {
+                $.ajax({
+                    url: '/stop_camera',
+                    type: 'GET',
+                    success: function (response) {
+                        console.log('Camera and audio stopped');
+                        $('#start-button').prop('disabled', false);
+                        $('#stop-button').prop('disabled', true);
+                    },
+                    error: function (error) {
+                        console.log('Error stopping camera and audio:', error);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>VIRTUAL THERAPY PLATFORM</h1>
+    </div>
+    <div class="center">
+        <div class="video-container">
+            <img src="{{ url_for('video_feed') }}" alt="Camera Feed">
+        </div>
+    </div>
+    <div class="control-buttons">
+        <button class="control-button" id="start-button">Start Session</button>
+        <button class="control-button" id="stop-button">Stop Session</button>
+    </div>
+</body>
+</html>

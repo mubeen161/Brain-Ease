@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Positive Quotes</title>
+  <style>
+     body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+      transition: background-color 1s ease;
+    }
+
+    #quote-container {
+      max-width: 500px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      animation: fade-in 1s ease;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 28px;
+      animation: slide-in 1s ease;
+    }
+
+    #quote {
+      font-size: 24px;
+      margin-bottom: 10px;
+      animation: pop-in 1s ease;
+    }
+
+    #author {
+      font-size: 18px;
+      color: #777;
+      animation: slide-in 1s ease;
+    }
+
+    #new-quote-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #3498db;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      animation: slide-in 1s ease;
+    }
+
+    #new-quote-btn:hover {
+      background-color: #2980b9;
+    }
+
+    .prediction {
+      margin-top: 20px;
+      font-size: 30px;
+    }
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes slide-in {
+      from {
+        transform: translateX(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    @keyframes pop-in {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+  
+
+  <div id="quote-container">
+    <h1>A Quotes for Your</h1>
+    <div id="quote">Click the button below to get a random positive quote.</div>
+    <div id="author"></div>
+    <button id="new-quote-btn">New Quote</button>
+  </div>
+  <!-- <div class="prediction"> -->
+    <p>Predicted Sleep Efficiency: {{ prediction }}</p>
+    <p>
+      A sleep score ranging from 70 to 100 is generally regarded as good for assessing sleep quality. </p>
+  <!-- </div> -->
+
+  <script>
+    const quotes = [
+      { quote: "You are enough, exactly as you are, right here, right now. Don't stop when you're tired. Stop when you're done.", author: "Unknown" },
+      { quote: "You are strong for facing each day, even when it feels like everything is falling apart.", author: "Unknown" },
+      { quote: "Believe you can and you're halfway there. You are capable of more than you know.", author: "Theodore Roosevelt" },
+      { quote: "Success is not about the destination, it's about the journey.", author: "Zig Ziglar" },
+      { quote: "You have within you right now, everything you need to deal with whatever the world can throw at you.", author: "Brian Tracy" }
+    ];
+
+    const bodyElement = document.body;
+    const quoteElement = document.getElementById('quote');
+    const authorElement = document.getElementById('author');
+    const newQuoteBtn = document.getElementById('new-quote-btn');
+
+    function getRandomQuote() {
+      return quotes[Math.floor(Math.random() * quotes.length)];
+    }
+
+    function displayQuote() {
+      const randomQuote = getRandomQuote();
+      quoteElement.textContent = randomQuote.quote;
+      authorElement.textContent = `- ${randomQuote.author}`;
+    }
+
+    function changeBackgroundColor() {
+      const randomColor = `rgb(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256})`;
+      bodyElement.style.backgroundColor = randomColor;
+    }
+
+    newQuoteBtn.addEventListener('click', () => {
+      const quoteContainer = document.getElementById('quote-container');
+      quoteContainer.style.animation = 'none';
+      void quoteContainer.offsetWidth;
+      quoteContainer.style.animation = 'fade-in 1s ease';
+
+      displayQuote();
+      changeBackgroundColor();
+    });
+  </script>
+</body>
+</html>

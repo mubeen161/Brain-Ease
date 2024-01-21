@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Global styles */
+    
+
+    /* Add this style for the prediction overlay */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column; /* Add flex-direction to align elements vertically */
+    }
+
+    /* Add this style for the prediction */
+    .prediction {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Style for the entire list */
+    ul {
+      list-style-type: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    /* Style for the entire list */
+    ul {
+      list-style-type: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    /* Style for list items */
+    li {
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+      transform: translateY(0);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                  box-shadow 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+ /* Gradient text effect */
+ li h3 {
+      background: linear-gradient(to right, #8b5959, #6d3e47); /* Gradient color effect */
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Hover effect */
+    li:hover {
+      transform: scale(1.05);
+      background-color: #e0e0e0;
+    }
+
+    /* Style for recommendation images */
+    img {
+      width: 100%;
+      height: 40%;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    /* Style for recommendation content */
+    .content {
+      padding: 20px;
+    }
+
+/* Button animation */
+li a {
+      display: grid;
+      padding: 8px 16px;
+      border: 2px solid #007bff; /* Add border around the button */
+      border-radius: 5px; /* Rounded corners */
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1); /* Added box shadow */
+    }
+
+    li a:hover {
+      color: #ff6a88; /* Change color on hover */
+      transform: scale(1.05); /* Grow slightly on hover */
+      box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Change box shadow on hover */
+    }
+
+    /* Style for recommendation descriptions */
+    p {
+      font-size: 17px;
+      margin: 10px 0;
+      color: #666;
+    }
+
+    /* Style for recommendation titles */
+    h3 {
+      font-size: 24px;
+      margin: 0 0 10px;
+      color: #333;
+    }
+
+    /* Style for recommendation descriptions */
+    p {
+      font-size: 17px;
+      margin: 10px 0;
+      color: #666;
+    }
+
+    /* Style for "Learn more" links */
+    a {
+      display: inline-block;
+      text-align: center;
+      background-color: #e7a5a5;
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #6c293b;
+    }
+  </style>
+</head>
+<body>
+  <div class="prediction">
+    <p>Predicted Sleep Efficiency: {{ prediction }}</p>
+    <P>Your sleep duration is much lower than the total amount of time you spend in bed [Less than 70%]</P>
+    <p>Here are some suggestion for you to improve your Sleep Efficiency</p>
+  </div>
+
+  <ul>
+    <li>
+      <img src="https://static.toiimg.com/thumb/msid-92927379,width-1280,resizemode-4/92927379.jpg" alt="Recommendation 1">
+      <div class="content">
+        <h3>Lifestyle and Environmental Factors</h3>
+        <p>Creating a conducive sleep environment, adopting healthy habits, managing light exposure, and having a bedtime routine can improve sleep quality. Establish a regular sleep routine by adhering to consistent bed and wake times, cultivate a soothing sleep environment characterized by darkness and quietness, ensure comfort with a supportive mattress and pillows, minimize exposure to screens before sleep to mitigate the impact of blue light, and refrain from consuming heavy meals, caffeine, or alcohol in proximity to bedtime.</p>
+        <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6033330/">Learn more</a>
+      </div>
+    </li>
+    <li>
+      <img src="https://sleepreviewmag.com/wp-content/uploads/2023/04/relaxation-techniques-guided-imagery-scaled.jpg" alt="Recommendation 2">
+      <div class="content">
+        <h3>Therapies and Techniques</h3>
+        <p>Various therapies and techniques offer alternative ways to enhance sleep quality. These range from traditional practices like acupuncture, acupressure, herbal remedies and reflexology to modern approaches such as Mindfulness-Based Stress Reduction (MBSR), sleep neurofeedback, emotional freedom techniques, hypnosis, sound therapy, magnet therapy, vibrational therapy, aromatherapy, Sleep Phase Chronotherapy, sleep visualization and expressive thought journaling. By combining mind-body integration and innovative methods, these interventions provide ways to relax and manage sleep issues.</p>
+        <a href="https://youtube.com/playlist?list=PLDfudWhqESo0uL2_wjK_h6LexwarTURk9">Learn more</a>
+      </div>
+    </li>
+    <li>
+      <img src="https://buzzrx.s3.amazonaws.com/f3c203ea-42c3-42bc-9ae2-b91d18cfda69/CBT.png" alt="Recommendation 3">
+      <div class="content">
+        <h3>Behavioral and Cognitive Approaches</h3>
+      <p>These approaches involve psychological techniques to change thoughts, behaviors, and attitudes about sleep to break the cycle of sleep problems encouraging healthy fixed sleep patterns. Methods like Cognitive Behavioral Therapy for Insomnia (CBT-I), Metacognitive Therapy for Insomnia (MCT-I), Sleep Cognitive Behavioral Therapy (CBT-S), Nocturnal Exposure Therapy, Sleep EEG, mindfulness, and muscle relaxation empower individuals to enhance sleep by tackling issues like anxiety and stress.</p>
+      <a href="https://youtube.com/playlist?list=PLDfudWhqESo2ym0jxWbPCouCcqCdcMISo">Learn more</a>
+      </div>
+<li>
+      <img src="https://www.healthifyme.com/blog/wp-content/uploads/2021/02/Wellbeing-blog_Cover.jpg" alt="Recommendation 1">
+      <div class="content">
+        <h3>Mind-Body Integration and Holistic Practices</h3>
+        <p>Mind-body integration and holistic practices highlight the link between mental, emotional, and physical well-being for improved sleep. Techniques like meditation, yoga, bedtime affirmations and expressive arts therapy create harmony within, promoting relaxation. By aligning mental and physical aspects, these methods enhance overall sleep vitality.</p>
+        <a href="https://youtube.com/playlist?list=PLDfudWhqESo3Iif_izfz6VAMvuWJZc3bW">Learn more</a>
+      </div>
+    </li>
+<li>
+      <img src="https://img.freepik.com/premium-vector/woman-sleeping-bed-with-electronic-smart-watch-app-tracker-hand-quality-quantity-sleep-control-concept_48369-41557.jpg" alt="Recommendation 1">
+      <div class="content">
+        <h3>Technological and Digital Solutions</h3>
+        <p>Embrace sleep improvement through a range of digital tools. Utilize digital tools such as sleep tracking apps, mobile applications, sleep coaching apps, and wearable devices to monitor, optimize, and improve sleep patterns. Explore virtual reality relaxation experiences, sleep-enhancing gadgets, and sleep quality tracking devices for personalized sleep enhancement.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.calm.android">Learn more</a>
+      </div>
+    </li>
+<li>
+      <img src="https://assets.website-files.com/6166dd66f3377b6273a31713/6453f1f1b71a1281cf541f42_19B3C1D5-1172-4D63-891A-B1C0276732E7_1_201_a.jpeg" alt="Recommendation 1">
+      <div class="content">
+        <h3>Medical and Clinical Interventions</h3>
+        <p>When addressing complex sleep challenges, medical and clinical interventions offer valuable solutions. Consultation with professionals, prescription medications, engagement with specialized sleep clinics, therapeutic techniques, and incorporation of sleep apnea devices form a multifaceted approach to manage sleep disorders and elevate the quality of sleep.</p>
+        <a href="https://pharmeasy.in/health-care/1284">Learn more</a>
+      </div>
+    </li>
+    </li>
+  </ul>
+</body>
+</html>
